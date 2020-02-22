@@ -19,5 +19,8 @@
   "homepage": "https://github.com/KaiWang/typescripts#readme",
   "devDependencies": {
     "typescript": "^3.8.2"
+  },
+  "dependencies": {
+    "json-server": "^0.16.0"
   }
 }
