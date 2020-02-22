@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/KaiWang/typescripts/issues"
   },
-  "homepage": "https://github.com/KaiWang/typescripts#readme"
+  "homepage": "https://github.com/KaiWang/typescripts#readme",
+  "devDependencies": {
+    "typescript": "^3.8.2"
+  }
 }

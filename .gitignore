@@ -1,2 +1,6 @@
 ./git
+node_modules/
 stats/node_modules/
+web/node_modules/
+web/.cache/
+web/dist/
