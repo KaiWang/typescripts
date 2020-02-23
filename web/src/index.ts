@@ -7,8 +7,18 @@ console.log(user);
 user.events.on('change', () => {
   console.log('change');
 });
-user.events.trigger('change');
-const id = user.attribute.get('id');
-console.log(id);
-console.log(user.syncs.fetch(1));
+user.trigger('change');
+
+console.log(user.fetch(1));
 console.log(user);
+
+console.log('=======================');
+const color = {
+  color: 'red',
+  printColor() {
+    console.log(this.color);
+  }
+};
+color.printColor();
+const p = color.printColor;
+p();
