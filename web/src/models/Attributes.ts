@@ -1,7 +1,7 @@
 export class Attributes<T> {
   constructor(private data: T) {}
-  get(propName: string): string | number {
-    return this.data[propName];
+  get<S extends keyof T>(key: S): T[S] {
+    return this.data[key];
   }
 
   set(update: T): void {
