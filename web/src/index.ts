@@ -22,3 +22,4 @@ const color = {
 color.printColor();
 const p = color.printColor;
 p();
+console.log('=======================');
