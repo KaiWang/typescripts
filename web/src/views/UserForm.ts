@@ -1,12 +1,17 @@
-export class UserForm {
-  constructor(public parent: Element) {}
+import { User } from '../models/User';
 
-  onButtonClick(): void {
-    console.log('Hi There');
-  }
+export class UserForm {
+  constructor(public parent: Element, public model: User) {}
+
+  onSetAgeButtonClick = () => {
+    console.log('age update');
+    this.model.setRandomAge();
+    console.log(this.model);
+  };
+
   eventsMap(): { [key: string]: () => void } {
     return {
-      'click:button': this.onButtonClick
+      'click:.set-age': this.onSetAgeButtonClick
     };
   }
 
@@ -14,8 +19,11 @@ export class UserForm {
     return `
         <div>
             <h1>User Form</h1>
+            <div>User Name: ${this.model.get('name')}</div>
+            <div>User Name: ${this.model.get('age')}</div>
             <input/>
             <button>Click Me</button>
+            <button class='set-age'>Set Random Age</button>
         </div>
         `;
   }
@@ -24,7 +32,7 @@ export class UserForm {
     const eventMap = this.eventsMap();
     for (let eventKey in eventMap) {
       const [eventName, selector] = eventKey.split(':');
-      fragment.querySelectorAll(selector).forEach(element => {
+      fragment.querySelectorAll(selector).forEach((element: Element) => {
         element.addEventListener(eventName, eventMap[eventKey]);
       });
     }
