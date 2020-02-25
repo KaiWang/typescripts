@@ -19,7 +19,5 @@ const color = {
     console.log(this.color);
   }
 };
-color.printColor();
-const p = color.printColor;
-p();
+
 console.log('=======================');
