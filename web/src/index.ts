@@ -1,23 +1,9 @@
+import { UserForm } from './views/UserForm';
 import { User } from './models/User';
 
-let user = new User({ id: 2, age: 40 });
-
-console.log(user);
-
-user.events.on('change', () => {
-  console.log('change');
-});
-user.trigger('change');
-
-console.log(user.fetch(1));
-console.log(user);
-
-console.log('=======================');
-const color = {
-  color: 'red',
-  printColor() {
-    console.log(this.color);
-  }
-};
-
-console.log('=======================');
+const user = User.buildUser({ name: 'Ryan', age: 10 });
+const root = document.getElementById('root');
+if (root) {
+  const userForm = new UserForm(root, user);
+  userForm.render();
+}

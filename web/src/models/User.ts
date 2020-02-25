@@ -1,7 +1,8 @@
 import { Eventing, Callback } from './Eventing';
 import { Sync } from './Sync';
 import { Attributes } from './Attributes';
-import { AxiosPromise } from 'axios';
+import { Model } from './Model';
+import { Collection } from './Collection';
 
 export interface UserProps {
   id?: number;
@@ -9,31 +10,18 @@ export interface UserProps {
   age?: number;
 }
 
-export class User {
-  public events: Eventing = new Eventing();
-  public syncs = new Sync<UserProps>();
-  public attribute: Attributes<UserProps>;
+const rootUrl = 'http://localhost:3000/users';
 
-  constructor(data: UserProps) {
-    this.attribute = new Attributes<UserProps>(data);
+export class User extends Model<UserProps> {
+  static buildUser(attr: UserProps): User {
+    return new User(new Attributes<UserProps>(attr), new Sync<UserProps>(), new Eventing());
   }
 
-  get(key: keyof UserProps) {
-    return this.attribute.get(key);
+  static buildUserCollection(): Collection<User, UserProps> {
+    return new Collection<User, UserProps>(rootUrl, (json: UserProps) => User.buildUser(json));
   }
-  set(update: UserProps): void {
-    this.attribute.set(update);
-  }
-  get on() {
-    return this.events.on;
-  }
-  trigger(eventName: string) {
-    this.events.trigger(eventName);
-  }
-  fetch(id: number): AxiosPromise<UserProps> {
-    return this.syncs.fetch(id);
-  }
-  save(data: UserProps): AxiosPromise<UserProps> {
-    return this.syncs.save(data);
+
+  setRandomAge(): void {
+    this.set({ age: Math.round(Math.random() * 100) });
   }
 }
